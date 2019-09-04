@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Auth;
+use App\Common\C;
 
 class UserController extends Controller
 {
