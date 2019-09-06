@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix'=>'User'], function() {
     Route::post('Login', 'UserController@userLogin');
+    Route::post('register','UserController@userRegister');
 });
 
 
