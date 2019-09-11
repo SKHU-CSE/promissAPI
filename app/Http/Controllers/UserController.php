@@ -14,10 +14,17 @@ class UserController extends Controller
         $phone=request('id','');
         $pwd=request('pw','');
         if (User::where('ID',$phone)->where('PW',$pwd)->exists()){
-            return C::RESULT_ARRAY_SUCCESS("성공.");
+            $user = User::where('ID',$phone)->where('PW',$pwd)->first();
+            return C::RESULT_ARRAY_SUCCESS($user);
         } else {
             return C::RESULT_ARRAY_ERROR("아이디와 비밀번호가 일치하지 않습니다.");
         }
+    }
+
+    public function userDelete(){
+
+        $id = request('index',0);
+        if(User::delete("$id"));
     }
 
     public function userRegister(){
