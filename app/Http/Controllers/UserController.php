@@ -32,10 +32,26 @@ class UserController extends Controller
         else return C::RESULT_ARRAY_NG();
     }
 
+    public function userChangePassword(){
+        $id= request('index','');
+        $newPassword=request('password','');
+
+        $user=User::where('id',$id)->first();
+
+        if($user==null) return C::RESULT_ARRAY_ERROR("사용자가 존재하지 않습니다");
+
+        $user->user_pw=$newPassword;
+        if($user->save())
+            return C::RESULT_ARRAY_SUCCESS($user);
+        else
+            return C::RESULT_ARRAY_ERROR("비밀번호 변경에 실패하였습니다.");
+
+    }
+
     public function userRegister(){
 
         $id = request('id','');
-        if(User::where('ID',$id)->exists())
+        if(User::where('user_id',$id)->exists())
         {
             return C::RESULT_ARRAY_ERROR("ID중복");
         }else{

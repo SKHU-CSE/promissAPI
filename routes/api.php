@@ -21,6 +21,7 @@ Route::group(['prefix'=>'User'], function() {
     Route::post('Login', 'UserController@userLogin');
     Route::post('register','UserController@userRegister');
     Route::post('delete','UserController@userDelete');
+    Route::post('changePassword','UserController@userChangePassword');
 });
 
 
