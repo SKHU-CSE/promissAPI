@@ -13,8 +13,8 @@ class UserController extends Controller
     {
         $phone=request('id','');
         $pwd=request('pw','');
-        if (User::where('ID',$phone)->where('PW',$pwd)->exists()){
-            $user = User::where('ID',$phone)->where('PW',$pwd)->first();
+        if (User::where('user_id',$phone)->where('user_pw',$pwd)->exists()){
+            $user = User::where('user_id',$phone)->where('user_pw',$pwd)->first();
             return C::RESULT_ARRAY_SUCCESS($user);
         } else {
             return C::RESULT_ARRAY_ERROR("아이디와 비밀번호가 일치하지 않습니다.");
@@ -24,7 +24,7 @@ class UserController extends Controller
     public function userDelete(){
 
         $id = request('index',0);
-        $user=User::where('primary_id',$id)->first();
+        $user=User::where('id',$id)->first();
 
         if($user==null) return C::RESULT_ARRAY_NG();
 
@@ -41,8 +41,8 @@ class UserController extends Controller
         }else{
             $pwd = request('pw','');
             $user= new User();
-            $user->ID=$id;
-            $user->PW=$pwd;
+            $user->user_id=$id;
+            $user->user_pw=$pwd;
             $user->last_date=date("Y-m-d");
             if($user->save()){
                 return C::RESULT_ARRAY_OK();
