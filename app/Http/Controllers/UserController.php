@@ -24,7 +24,8 @@ class UserController extends Controller
     public function userDelete(){
 
         $id = request('index',0);
-        if(User::delete("$id"));
+        if(User::delete("$id"))return C::RESULT_ARRAY_OK();
+        else return C::RESULT_ARRAY_NG();
     }
 
     public function userRegister(){
