@@ -24,9 +24,11 @@ class UserController extends Controller
     public function userDelete(){
 
         $id = request('index',0);
-        $user=User::find($id);
+        $user=User::where('primary_id',$id)->first();
 
-        if($user != null&&$user->delete())return C::RESULT_ARRAY_OK();
+        if($user==null) return C::RESULT_ARRAY_NG();
+
+        if($user->delete())return C::RESULT_ARRAY_OK();
         else return C::RESULT_ARRAY_NG();
     }
 
