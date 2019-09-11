@@ -25,7 +25,8 @@ class UserController extends Controller
 
         $id = request('index',0);
         $user=User::find($id);
-        if($user->delete())return C::RESULT_ARRAY_OK();
+
+        if($user != null&&$user->delete())return C::RESULT_ARRAY_OK();
         else return C::RESULT_ARRAY_NG();
     }
 
