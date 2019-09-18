@@ -21,6 +21,8 @@ class UserController extends Controller
         }
     }
 
+
+
     public function userDelete(){
 
         $id = request('index',0);
@@ -48,6 +50,22 @@ class UserController extends Controller
 
     }
 
+
+
+    public function UploadGPS(){
+        $id=request('id',0);
+
+        $user = User::find($id);
+        if(empty($user))
+            return C::RESULT_ARRAY_ERROR("현재 회원님의 회원 정보가 존재하지 않습니다.");
+        $user->longitude=request('longitude',0.0);
+        $user->latitude=request('latitude',0.0);
+        if($user->save())
+            return C::RESULT_ARRAY_OK();
+        else
+            return C::RESULT_ARRAY_ERROR("현재 DB서버가 문제가 있어 관리자에게 문의를 주시길 바랍니다.");
+    }
+
     public function userRegister(){
 
         $id = request('id','');
@@ -59,6 +77,8 @@ class UserController extends Controller
             $user= new User();
             $user->user_id=$id;
             $user->user_pw=$pwd;
+            $user->latitude=0;
+            $user->longitude=0;
             $user->last_date=date("Y-m-d");
             if($user->save()){
                 return C::RESULT_ARRAY_OK();
