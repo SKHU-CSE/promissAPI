@@ -26,4 +26,9 @@ Route::group(['prefix'=>'User'], function() {
     Route::post('changePassword','UserController@userChangePassword');
 });
 
+Route::group(['prefix'=>'Appointment'], function() {
+    Route::post('gpsUpdate','AppointmentController@UploadAppointment');
+
+});
+
 
