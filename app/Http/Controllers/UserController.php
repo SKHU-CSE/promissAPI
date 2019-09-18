@@ -51,6 +51,12 @@ class UserController extends Controller
     }
 
 
+    public function SearchUser(){
+        $id = request('ID','');
+        $user=User::where('user_id','regexp',$id.'[a-zA-Z]*')->get();
+        return C::RESULT_ARRAY_SUCCESS($user);
+
+    }
 
     public function UploadGPS(){
         $id=request('id',0);

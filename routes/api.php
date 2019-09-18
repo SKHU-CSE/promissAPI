@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix'=>'User'], function() {
+    Route::post('gpsUpdate','UserController@UploadGPS');
+    Route::post('search','UserController@SearchUser');
     Route::post('Login', 'UserController@userLogin');
     Route::post('register','UserController@userRegister');
     Route::post('delete','UserController@userDelete');
