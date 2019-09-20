@@ -28,7 +28,7 @@ class AppointmentController extends Controller
             $appointment->Members()->create([
                 'user_id'=>request('id',0),
                 'Fine_current'=>0,
-                'Fine final'=>0,
+                'Fine_final'=>0,
                 'distance'=>0.0,
                 'success'=>false,
             ]);
