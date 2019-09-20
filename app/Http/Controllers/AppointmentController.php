@@ -16,7 +16,7 @@ class AppointmentController extends Controller
 
         $waiting = Waiting::where('user_id',$id)->first();
 
-        if(empty($waiting))
+        if(!empty($waiting))
         {
             $appointment = Appointment::find($waiting->appointment_id);
             return C::RESULT_ARRAY_SUCCESS($appointment);
