@@ -5,9 +5,52 @@ namespace App\Http\Controllers;
 
 use App\Common\C;
 use App\Models\Appointment;
+use App\Models\Waiting;
 
 class AppointmentController extends Controller
 {
+
+    public function CheckInvite()
+    {
+        $id = request('id',0);
+
+        $waiting = Waiting::where('user_id',$id)->first();
+
+        if(empty($waiting))
+        {
+            $appointment = Appointment::find($waiting->appointment_id);
+            return C::RESULT_ARRAY_SUCCESS($appointment);
+
+        }else{ //초대가 없는 경우
+            return C::RESULT_ARRAY_NG();
+        }
+    }
+
+    public function acceptInvite(){
+        $id = request('id',0);
+        $accept = request('accept',0);
+        $waiting=Waiting::where('user_id',$id)->first();
+        $appointment_id = $waiting->appointment_id;
+
+        if($waiting->delete()){
+            $appointment = Appointment::find($appointment_id);
+
+            if($accept==1) { //수락 했을 때
+                $appointment->Members()->create([
+                    'user_id' => $id,
+                    'Fine_current' => 0,
+                    'Fine_final' => 0,
+                    'distance' => 0.0,
+                    'success' => false,
+                ]);
+            }
+            return C::RESULT_ARRAY_OK();
+        }
+        else{
+
+        } return C::RESULT_ARRAY_NG();
+    }
+
 
     public function UploadAppointment() //post
     {
@@ -37,7 +80,7 @@ class AppointmentController extends Controller
             for($i=0;$i<$num;$i++)
             {
                 $receive_id=request('member_id'.$i,0);
-                $appointment->wattings()->create([
+                $appointment->waitings()->create([
                     'user_id'=> $receive_id,
                     'date'=> date('Y-m-d H:i'),
                 ]);

@@ -12,7 +12,7 @@ class Appointment extends Model
         'id','status','address','detail','latitude','longitude','date','date_time','radius','Fine_money','Fine_time','main_user_id',
     ];
     public $timestamps=false;
-    public function wattings()
+    public function waitings()
     {
         return $this->hasMany(Waitting::class);
     }

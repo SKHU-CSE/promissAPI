@@ -28,6 +28,8 @@ Route::group(['prefix'=>'User'], function() {
 
 Route::group(['prefix'=>'Appointment'], function() {
     Route::post('newAppointment','AppointmentController@UploadAppointment');
+    Route::post('checkInvite','AppointmentController@CheckInvite');
+    Route::post('acceptInvite','AppointmentController@acceptInvite');
 
 });
 
