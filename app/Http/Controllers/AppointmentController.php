@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Common\C;
 use App\Models\Appointment;
 use App\Models\Waiting;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends Controller
 {
@@ -32,7 +33,7 @@ class AppointmentController extends Controller
         $waiting=Waiting::where('user_id',$id)->first();
         $appointment_id = $waiting->appointment_id;
 
-        if($waiting->delete()){
+        if( DB::table('Waiting')->where('user_id',$id)->delete()>0){
             $appointment = Appointment::find($appointment_id);
 
             if($accept==1) { //수락 했을 때
