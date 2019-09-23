@@ -14,7 +14,7 @@ class Appointment extends Model
     public $timestamps=false;
     public function waitings()
     {
-        return $this->hasMany(Waitting::class);
+        return $this->hasMany(Waiting::class);
     }
     public function Members(){
         return $this->hasMany(Member::class);

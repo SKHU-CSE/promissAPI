@@ -60,7 +60,7 @@ class AppointmentController extends Controller
         $appointment->detail = request('detail', '상세주소');
         $appointment->latitude = request('latitude', '36');
         $appointment->longitude = request('longitude', '126');//
-        $appointment->date = date("Y.m.d", strtotime(request('date','')));
+        $appointment->date = date("Y-m-d", strtotime(request('date','')));
         $appointment->date_time = date("H:i", strtotime(request('date_time','')));
         $appointment->radius=100;
         $appointment->Fine_time = request('Fine_time', '300');//3분
