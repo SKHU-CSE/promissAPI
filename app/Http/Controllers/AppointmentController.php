@@ -27,6 +27,21 @@ class AppointmentController extends Controller
         }
     }
 
+    public function getAppointment(){
+
+        $id = request("id",-1);
+        $appointment = Appointment::find($id);
+
+        if($appointment->status == 0) // 약속 대기 중
+        {
+            return C::RESULT_ARRAY_ERROR($appointment);
+        }
+        else if($appointment->status == 1) //약속 실행중
+        {
+            return C::RESULT_ARRAY_SUCCESS($appointment);
+        }
+    }
+
     public function acceptInvite(){
         $id = request('id',0);
         $accept = request('accept',0);
@@ -45,7 +60,7 @@ class AppointmentController extends Controller
                     'success' => false,
                 ]);
             }
-            return C::RESULT_ARRAY_OK();
+            return C::RESULT_ARRAY_SUCCESS($appointment);
         }
         else{
 
@@ -87,7 +102,7 @@ class AppointmentController extends Controller
                 ]);
 
             }
-            return C::RESULT_ARRAY_SUCCESS("약속 생성에 성공하였습니다.");
+            return C::RESULT_ARRAY_SUCCESS($appointment);
         } else
         {
             return C::RESULT_ARRAY_ERROR("약속 생성에 실패했습니다.");

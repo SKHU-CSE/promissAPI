@@ -4,6 +4,11 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\Appointment;
+use App\Models\Member;
+use App\User;
 
 class Kernel extends ConsoleKernel
 {
