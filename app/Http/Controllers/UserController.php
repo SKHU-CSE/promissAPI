@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Auth;
 use App\Common\C;
+use App\Models\Appointment;
+use App\Models\Member;
 
 class UserController extends Controller
 {
@@ -15,6 +17,11 @@ class UserController extends Controller
         $pwd=request('pw','');
         if (User::where('user_id',$phone)->where('user_pw',$pwd)->exists()){
             $user = User::where('user_id',$phone)->where('user_pw',$pwd)->first();
+            if(Member::where('user_id',$user->id)->exists())
+            {
+                $member = Member::where('user_id',$user->id)->fitst();
+                $user->appointment_id = $member->appointment_id;
+            }
             return C::RESULT_ARRAY_SUCCESS($user);
         } else {
             return C::RESULT_ARRAY_ERROR("아이디와 비밀번호가 일치하지 않습니다.");

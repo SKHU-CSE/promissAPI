@@ -35,7 +35,6 @@ class AppointmentController extends Controller
 
         $members = Member::where('appointment_id',$appointment->id)->get();
 
-
         $appointment->members=$members;
 
         return C::RESULT_ARRAY_SUCCESS($appointment);
