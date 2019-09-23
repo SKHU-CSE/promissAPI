@@ -33,7 +33,7 @@ class AppointmentController extends Controller
 
         $appointment = Appointment::find($id);
 
-        $members = Member::where('user_id',$appointment->id)->get();
+        $members = Member::where('appointment_id',$appointment->id)->get();
 
 
         $appointment->members=$members;
@@ -49,14 +49,11 @@ class AppointmentController extends Controller
         if($appointment->status == 0) // 약속 대기 중
         {
             return C::RESULT_ARRAY_ERROR($appointment);
-        }
-        else if($appointment->status == 1) //약속 실행중
+        }else if($appointment->status == 1) //약속 실행중
         {
             return C::RESULT_ARRAY_SUCCESS($appointment);
         }
     }
-
-
 
     public function acceptInvite(){
         $id = request('id',0);
