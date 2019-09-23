@@ -21,6 +21,9 @@ class UserController extends Controller
             {
                 $member = Member::where('user_id',$user->id)->fitst();
                 $user->appointment_id = $member->appointment_id;
+            }else
+            {
+                $user->appointment_id = -1;
             }
             return C::RESULT_ARRAY_SUCCESS($user);
         } else {
