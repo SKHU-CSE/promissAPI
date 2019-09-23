@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Common\C;
 use App\Models\Appointment;
+use App\Models\Member;
 use App\Models\Waiting;
 use Illuminate\Support\Facades\DB;
 
@@ -26,6 +27,19 @@ class AppointmentController extends Controller
             return C::RESULT_ARRAY_NG();
         }
     }
+    public function getAppointment_detail(){
+
+        $id = request('id',-1);
+
+        $appointment = Appointment::find($id);
+
+        $members = Member::where('user_id',$appointment->id)->get();
+
+
+        $appointment->members=$members;
+
+        return C::RESULT_ARRAY_SUCCESS($appointment);
+    }
 
     public function getAppointment(){
 
@@ -41,6 +55,8 @@ class AppointmentController extends Controller
             return C::RESULT_ARRAY_SUCCESS($appointment);
         }
     }
+
+
 
     public function acceptInvite(){
         $id = request('id',0);
