@@ -8,7 +8,7 @@ class NotificationController extends Controller
 {
 
 
-    public static function SendGameNotification($id,$data)
+    public static function SendGameNotification($id,$data,$member)
     {
         //알림 보내기
 
@@ -23,9 +23,9 @@ class NotificationController extends Controller
             $options
         );
 //
-//        $data['time']=$time;
-//        $data['appoint_radius']=$appoint_radius;
-//        $data['totalTime']=$total;
+
+
+        $data['members']=$member;
         $pusher->trigger('ProMiss', 'event_game'.$id, $data);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
-
+use App\Http\Controllers\NotificationController;
 use App\Service\GpsService;
 use App\Models\Appointment;
 use App\Models\Member;
@@ -85,10 +85,11 @@ class Kernel extends ConsoleKernel
                     if ($appointObject->radius < 100)
                         $appointObject->radius = 100; //100미터까지
 
+                    $member = Member::join('users', 'Member.user_id', '=', 'users.id')->where('Member.appointment_id', $appointObject->id)->where('Member.success', 0)->get();
                     if($appointObject->Fine_current==0) {
 
                         $appointObject->Fine_current = $appointObject->Fine_time;
-                        $member = Member::join('users', 'Member.user_id', '=', 'users.id')->where('Member.appointment_id', $appointObject->id)->where('Member.success', 0)->get();
+
 
                         foreach ($member as $object) {
                             $distance = GpsService::geoDistance($object->latitude, $object->longitude, $appointObject->latitude, $appointObject->longitude) * 1000;
@@ -105,7 +106,7 @@ class Kernel extends ConsoleKernel
                     }else{
                         $appointObject->Fine_current = $appointObject->Fine_current -5;
                     }
-                    //     NotificationController::SendGameNotification($appointObject->id,$date_gap->h * 60  + $date_gap->i,(int)($totalGameTime/60),$appoint_radius,$pageTime,AppointmentController::GetLocat
+                         NotificationController::SendGameNotification($appointObject->id,$appointObject,$member);
                 }
 
             }
