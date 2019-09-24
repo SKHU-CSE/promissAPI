@@ -19,7 +19,7 @@ class UserController extends Controller
             $user = User::where('user_id',$phone)->where('user_pw',$pwd)->first();
             if(Member::where('user_id',$user->id)->exists())
             {
-                $member = Member::where('user_id',$user->id)->fitst();
+                $member = Member::where('user_id',$user->id)->first();
                 $user->appointment_id = $member->appointment_id;
             }else
             {
