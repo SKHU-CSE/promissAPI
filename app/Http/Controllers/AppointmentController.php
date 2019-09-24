@@ -33,7 +33,7 @@ class AppointmentController extends Controller
 
         $appointment = Appointment::find($id);
 
-        $members = Member::where('appointment_id',$appointment->id)->get();
+        $members = $member = DB::table('Member')->join('users', 'Member.user_id', '=', 'users.id')->where('Member.appointment_id', $appointment->id)->get();
 
         $appointment->members=$members;
 
@@ -85,6 +85,7 @@ class AppointmentController extends Controller
         $send_id=request('id', 0);
         $appointment = new Appointment();
         $appointment->address = request('address', '성공회대');
+        $appointment->name = request('name','이름 없음');
         $appointment->detail = request('detail', '상세주소');
         $appointment->latitude = request('latitude', '36');
         $appointment->longitude = request('longitude', '126');//
@@ -93,6 +94,7 @@ class AppointmentController extends Controller
         $appointment->radius=100;
         $appointment->Fine_time = request('Fine_time', '300');//3분
         $appointment->Fine_money = request('Fine_money', '500');
+        $appointment->Fine_current = 0;
         $appointment->main_user_id = $send_id;
         if ($appointment->save()) {
             //멤버 테이블에 방장을 넣어야 함

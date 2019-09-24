@@ -9,7 +9,7 @@ class Appointment extends Model
 {
     protected $table = 'appointment';
     protected $fillable = [
-        'id','status','address','detail','latitude','longitude','date','date_time','radius','Fine_money','Fine_time','main_user_id',
+        'id','status','name','address','detail','latitude','longitude','date','date_time','radius','Fine_money','Fine_time','Fine_current','main_user_id',
     ];
     public $timestamps=false;
     public function waitings()
