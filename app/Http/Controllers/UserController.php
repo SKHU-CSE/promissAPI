@@ -97,7 +97,7 @@ class UserController extends Controller
             $user->longitude=0;
             $user->last_date=date("Y-m-d");
             if($user->save()){
-                return C::RESULT_ARRAY_OK();
+                return C::RESULT_ARRAY_SUCCESS($user);
             }else{
                 return C::RESULT_ARRAY_ERROR("현재 서버 점검 중으로 회원가입 기능을 이용하실 수 없습니다.");
             }
