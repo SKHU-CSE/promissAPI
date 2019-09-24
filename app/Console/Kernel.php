@@ -105,7 +105,9 @@ class Kernel extends ConsoleKernel
                     }else{
                         $appointObject->Fine_current = $appointObject->Fine_current -5;
                     }
+                    //     NotificationController::SendGameNotification($appointObject->id,$date_gap->h * 60  + $date_gap->i,(int)($totalGameTime/60),$appoint_radius,$pageTime,AppointmentController::GetLocat
                 }
+
             }
             $appointObject->save(); //반지름 변경
         }
