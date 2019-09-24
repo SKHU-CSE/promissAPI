@@ -51,6 +51,9 @@ class AppointmentController extends Controller
         }else if($appointment->status == 1) //약속 실행중
         {
             return C::RESULT_ARRAY_SUCCESS($appointment);
+        }else
+        {
+            return C::RESULT_ARRAY_ERROR($appointment);
         }
     }
 
