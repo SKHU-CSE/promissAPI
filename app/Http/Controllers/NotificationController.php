@@ -16,7 +16,7 @@ class NotificationController extends Controller
             'cluster' => 'ap3',
             'useTLS' => true
         );
-        $pusher = new Pusher\Pusher(
+        $pusher = new \Pusher\Pusher(
             'cb4bcb99bfc3727bdfb0',
             '6cb5dd11536445d1355c',
             '867663',
