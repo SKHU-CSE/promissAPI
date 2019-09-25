@@ -32,7 +32,7 @@ Route::group(['prefix'=>'Appointment'], function() {
     Route::post('acceptInvite','AppointmentController@acceptInvite');
     Route::post('getAppointment','AppointmentController@getAppointment');
     Route::post('getAppointment_detail','AppointmentController@getAppointment_detail');
-    Route::post('test','AppointmentController@test');
+
 });
 
 
