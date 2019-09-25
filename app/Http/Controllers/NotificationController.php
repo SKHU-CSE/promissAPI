@@ -24,8 +24,8 @@ class NotificationController extends Controller
         );
 //
 
-
-        $data['members']=$member;
-        $pusher->trigger('ProMiss', 'event_game'.$id, $data);
+        $result['appointment']=$data;
+        $result['members']=$member;
+        $pusher->trigger('ProMiss', 'event_game'.$id, $result);
     }
 }
