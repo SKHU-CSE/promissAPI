@@ -93,20 +93,22 @@ class Kernel extends ConsoleKernel
 
                         foreach ($member as $object) {
                             $distance = GpsService::geoDistance($object->latitude, $object->longitude, $appointObject->latitude, $appointObject->longitude) * 1000;
-                            $member_user = Member::where('appointment_id', $appointObject->id)->where('user_id', $object->user_id)->first();
+                            $member_user = DB::table('Member')->where('appointment_id', $appointObject->id)->where('user_id', $object->user_id)->first();
                             if ($appointObject->radius < $distance) { //원 밖에 있다.
 //
+                                if($member_user!=null)
                                 $member_user->update(['Fine_current' => (int)$member_user->Fine_current + $appointObject->Fine_money]);
 
                             } else if ($distance < 100) //도착
                             {
+                                if($member_user!=null)
                                 $member_user->update(['success' => 1, 'Fine_current' => 0]);
                             }
                         }
                     }else{
                         $appointObject->Fine_current = $appointObject->Fine_current -5;
                     }
-                         NotificationController::SendGameNotification($appointObject->id,$appointObject,$member);
+                    NotificationController::SendGameNotification($appointObject->id,$appointObject,$member);
                 }
 
             }
