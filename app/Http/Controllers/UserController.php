@@ -63,7 +63,7 @@ class UserController extends Controller
 
     public function SearchUser(){
         $id = request('ID','');
-        $user=User::where('user_id','regexp',$id.'[a-zA-Z]*')->get();
+        $user=User::where('user_name','regexp',$id.'[a-zA-Z]*')->get();
         return C::RESULT_ARRAY_SUCCESS($user);
 
     }
@@ -85,7 +85,7 @@ class UserController extends Controller
     public function userRegister(){
 
         $id = request('id','');
-        if(User::where('user_id',$id)->exists())
+        if(User::where('user_name',$id)->exists())
         {
             return C::RESULT_ARRAY_ERROR("ID중복");
         }else{
