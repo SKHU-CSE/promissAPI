@@ -74,14 +74,14 @@ class Kernel extends ConsoleKernel
                          if ($time_gap <= $totalGameTime) {
                             // 시작 상태로 변경하기
                             $appointObject->status = 1;
-                            $appointObject->radius = 80000;
+                            $appointObject->radius = 40000;
 
                         }
                     }
                 } // **약속 실행중**
                 else {
 
-                    $appointObject->radius = $appointObject->radius - ((80000 / $timer) * 5);
+                    $appointObject->radius = $appointObject->radius - ((40000 / $timer) * 5);
                     if ($appointObject->radius < 100)
                         $appointObject->radius = 100; //100미터까지
 

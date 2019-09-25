@@ -47,6 +47,8 @@ class AppointmentController extends Controller
         $id = request("id",-1);
         $appointment = Appointment::find($id);
 
+        if($appointment==null)return C::RESULT_ARRAY_NG();
+
         if($appointment->status == 0) // 약속 대기 중
         {
             return C::RESULT_ARRAY_ERROR($appointment);
