@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'Pusher' => Pusher\Pusher::class,
     /*
     |--------------------------------------------------------------------------
     | Application Environment
