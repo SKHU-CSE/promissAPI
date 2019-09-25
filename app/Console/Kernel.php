@@ -93,7 +93,7 @@ class Kernel extends ConsoleKernel
 
                         foreach ($member as $object) {
                             $distance = GpsService::geoDistance($object->latitude, $object->longitude, $appointObject->latitude, $appointObject->longitude) * 1000;
-                            $member_user = DB::table('Member')->where('appointment_id', $appointObject->id)->where('user_id', $object->user_id)->first();
+                            $member_user = Member::where('appointment_id', $appointObject->id)->where('user_id', $object->user_id)->first();
                             if ($appointObject->radius < $distance) { //원 밖에 있다.
 //
                                 if($member_user!=null)
