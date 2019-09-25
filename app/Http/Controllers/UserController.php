@@ -15,8 +15,8 @@ class UserController extends Controller
     {
         $phone=request('id','');
         $pwd=request('pw','');
-        if (User::where('user_id',$phone)->where('user_pw',$pwd)->exists()){
-            $user = User::where('user_id',$phone)->where('user_pw',$pwd)->first();
+        if (User::where('user_name',$phone)->where('user_pw',$pwd)->exists()){
+            $user = User::where('user_name',$phone)->where('user_pw',$pwd)->first();
             if(Member::where('user_id',$user->id)->exists())
             {
                 $member = Member::where('user_id',$user->id)->first();
@@ -91,7 +91,7 @@ class UserController extends Controller
         }else{
             $pwd = request('pw','');
             $user= new User();
-            $user->user_id=$id;
+            $user->user_name=$id;
             $user->user_pw=$pwd;
             $user->latitude=0;
             $user->longitude=0;
