@@ -29,6 +29,39 @@ class AppointmentController extends Controller
             return C::RESULT_ARRAY_NG();
         }
     }
+
+    public function NewMemberInvite()
+    {
+        $id = request('id',0); //약속 id
+        $appointment = Appointment::find($id);
+        $num = request('num',0); //초대 숫자
+
+        for($i=0;$i<$num;$i++)
+        {
+            $receive_id=request('member_id'.$i,0);
+            $appointment->waitings()->create([
+                'user_id'=> $receive_id,
+                'date'=> date('Y-m-d H:i'),
+            ]);
+
+        }
+        return C::RESULT_ARRAY_OK();
+    }
+
+    public function leaveAppointment(){
+        $id = request("id",0); //나갈 사람 id
+        $appoint_id = request("appoint_id",0); //약속 id
+
+        if(Member::where('user_id',$id)->where('appointment_id',$appoint_id)->delete())
+        {
+            return C::RESULT_ARRAY_OK();
+        }else
+        {
+            return C::RESULT_ARRAY_NG();
+        }
+
+    }
+
     public function getAppointment_detail(){
 
         $id = request('id',-1);
