@@ -87,6 +87,10 @@ class AppointmentController extends Controller
             return C::RESULT_ARRAY_ERROR($appointment);
         }else if($appointment->status == 1) //약속 실행중
         {
+            $members = $member = DB::table('Member')->join('users', 'Member.user_id', '=', 'users.id')->where('Member.appointment_id', $appointment->id)->get();
+
+            $appointment->members=$members;
+
             return C::RESULT_ARRAY_SUCCESS($appointment);
         }else
         {
