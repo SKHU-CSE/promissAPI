@@ -98,6 +98,18 @@ class AppointmentController extends Controller
         }
     }
 
+    public function gpsTest(){
+
+        $user_id = request('user_id',0);
+
+        $appoint_id = request('appoint_id',0);
+
+        $user = User::find($user_id);
+        $appoint = Appointment::find($appoint_id);
+
+        return C::RESULT_ARRAY_SUCCESS(GpsService::geoDistance($user->latitude,$user->longitude,$appoint->latitude,$appoint->longitude)*1000);
+    }
+
     public function acceptInvite(){
         $id = request('id',0);
         $accept = request('accept',0);
