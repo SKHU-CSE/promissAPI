@@ -15,6 +15,9 @@ class Appointment extends Model
     /**
      * @var int
      */
+    public function results(){
+        return $this->hasMany(Result::class);
+    }
     public function waitings()
     {
         return $this->hasMany(Waiting::class);
