@@ -81,7 +81,7 @@ class Kernel extends ConsoleKernel
                 } // **약속 실행중**
                 else {
 
-                    $appointObject->radius = $appointObject->radius - ((20000 / $timer) * 5 * 60);
+                    $appointObject->radius = $appointObject->radius - ((20000 / $timer) * 60);
                     if ($appointObject->radius < 100)
                         $appointObject->radius = 100; //100미터까지
 
@@ -115,7 +115,7 @@ class Kernel extends ConsoleKernel
                         }
 
                     }else{
-                        $appointObject->Fine_current = $appointObject->Fine_current -5;
+                        $appointObject->Fine_current = $appointObject->Fine_current -1;
                     }
                     NotificationController::SendGameNotification($appointObject->id,$appointObject,$member);
                 }
