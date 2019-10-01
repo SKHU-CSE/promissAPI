@@ -104,7 +104,16 @@ class Kernel extends ConsoleKernel
                                 if($member_user!=null)
                                 $member_user->update(['success' => 1, 'Fine_current' => 0]);
                             }
+
+                            $appointObject->results()->create([
+                                'user_id' => $object->user_id,
+                                'Fine_current' => $member_user->Fine_current,
+                                'appointment_radius' => $appointObject->radius,
+                                'latitude' => $object->latitude,
+                                'longitude'=> $object->longitude,
+                            ]);
                         }
+
                     }else{
                         $appointObject->Fine_current = $appointObject->Fine_current -5;
                     }
