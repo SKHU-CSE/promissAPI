@@ -17,10 +17,10 @@ class UserController extends Controller
         $pwd=request('pw','');
         if (User::where('user_name',$phone)->where('user_pw',$pwd)->exists()){
             $user = User::where('user_name',$phone)->where('user_pw',$pwd)->first();
-            if(Member::join('appointment','Member.appointment_id','=','appointment.id')->where('appointment.status','!=',2)->exists())
+            if(Member::join('appointment','Member.appointment_id','=','appointment.id')->where('appointment.status','!=',2)->where('user_id',$user->id)->exists())
             {
 
-                $member = Member::join('appointment','Member.appointment_id','=','appointment.id')->where('appointment.status','!=',2)->first();
+                $member = Member::join('appointment','Member.appointment_id','=','appointment.id')->where('appointment.status','!=',2)->where('user_id',$user->id)->first();
                 $user->appointment_id = $member->appointment_id;
             }else
             {
