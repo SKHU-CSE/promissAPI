@@ -127,8 +127,12 @@ class AppointmentController extends Controller
                     'distance' => 0.0,
                     'success' => false,
                 ]);
+                return C::RESULT_ARRAY_SUCCESS($appointment);
+            }else
+            {
+                return C::RESULT_ARRAY_NG();
             }
-            return C::RESULT_ARRAY_SUCCESS($appointment);
+
         }
         else{
 
