@@ -35,6 +35,8 @@ Route::group(['prefix'=>'Appointment'], function() {
     Route::post('newMember','AppointmentController@NewMemberInvite');
     Route::post('leave','AppointmentController@leaveAppointment');
     Route::post("gpsTest",'AppointmentController@gpsTest');
+    Route::post('myResult','AppointmentController@GetMyResult');
+    Route::post('Results','AppointmentController@GetResults');
 });
 
 
