@@ -22,7 +22,7 @@ class AppointmentController extends Controller
         $appoint_id = request('appoint_id',0);
 
         $appointment = Appointment::find($appoint_id);
-        $member =  Member::where('appointment_id',$appoint_id)->get();
+        $member = DB::table('Member')->join('users', 'Member.user_id', '=', 'users.id')->where('Member.appointment_id', $appointment->id)->get();
         $result = Result::where('appointment_id',$appoint_id)->where('user_id',$id)->get();
 
 
