@@ -18,16 +18,18 @@ class AppointmentController extends Controller
 
 
     public function GetResults(){
-
+        $id = request('id',0);
         $appoint_id = request('appoint_id',0);
 
         $appointment = Appointment::find($appoint_id);
-        $result =  Result::where('appointment_id',$appoint_id)->get();
+        $member =  Member::where('appointment_id',$appoint_id)->get();
+        $result = Result::where('appointment_id',$appoint_id)->where('user_id',$id)->get();
 
 
         $data = array();
         $data['appoint'] = $appointment;
-        $data['result'] = $result;
+        $data['member'] = $member;
+        $data['result']=$result;
 
         return C::RESULT_ARRAY_SUCCESS($data);
     }
