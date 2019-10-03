@@ -81,6 +81,7 @@ class Kernel extends ConsoleKernel
                 } // **약속 실행중**
                 else {
 
+
                     $appointObject->radius = $appointObject->radius - ((20000 / $timer) * 60);
                     if ($appointObject->radius < 100)
                         $appointObject->radius = 100; //100미터까지
@@ -92,10 +93,12 @@ class Kernel extends ConsoleKernel
 
 
                         foreach ($member as $object) {
+                            $circle_in = true;
                             $distance = GpsService::geoDistance($object->latitude, $object->longitude, $appointObject->latitude, $appointObject->longitude) * 1000;
                             $member_user = Member::where('appointment_id', $appointObject->id)->where('user_id', $object->user_id)->first();
                             if ($appointObject->radius < $distance) { //원 밖에 있다.
 //
+                                $circle_in = false;
                                 if($member_user!=null)
                                 $member_user->update(['Fine_current' => (int)$member_user->Fine_current + $appointObject->Fine_money]);
 
@@ -111,6 +114,8 @@ class Kernel extends ConsoleKernel
                                 'appointment_radius' => $appointObject->radius,
                                 'latitude' => $object->latitude,
                                 'longitude'=> $object->longitude,
+                                'time'=>date("h:i"),
+                                'circle_in'=>$circle_in,
                             ]);
                         }
 

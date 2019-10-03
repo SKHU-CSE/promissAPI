@@ -8,7 +8,7 @@ class Result extends Model
 {
     protected $table = 'ResultTable';
     protected $fillable = [
-        'appointment_id','user_id','appointment_radius','latitude','longitude','Fine_current','id',
+        'appointment_id','user_id','appointment_radius','latitude','longitude','Fine_current','circle_in','time','id',
     ];
     public $timestamps=false;
     public function appointments()
