@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Common\C;
 use App\Models\Appointment;
 use App\Models\Member;
+use App\Models\Result;
 use App\Models\Waiting;
 use App\Service\GpsService;
 use App\User;
@@ -14,6 +15,32 @@ use Illuminate\Support\Facades\DB;
 class AppointmentController extends Controller
 {
 
+
+
+    public function GetResults(){
+
+        $id = request('id',0);
+        $appoint_id = request('appoint_id',0);
+
+        $appointment = Appointment::find($appoint_id);
+        $result =  Result::where('appointment_id',$appoint_id)->get();
+
+
+        $data = array();
+        $data['appoint'] = $appointment;
+        $data['result'] = $result;
+
+        return C::RESULT_ARRAY_SUCCESS($data);
+    }
+
+    public function GetMyResult(){
+        $id = request('id',0);
+        $appoint_id = request('appoint_id',0);
+
+        $result =  Result::where('user_id',$id)->where('appointment_id',$appoint_id)->get();
+
+        return C::RESULT_ARRAY_SUCCESS($result);
+    }
     public function CheckInvite()
     {
         $id = request('id',0);
@@ -59,7 +86,6 @@ class AppointmentController extends Controller
         {
             return C::RESULT_ARRAY_NG();
         }
-
     }
 
     public function getAppointment_detail(){
