@@ -19,7 +19,6 @@ class AppointmentController extends Controller
 
     public function GetResults(){
 
-        $id = request('id',0);
         $appoint_id = request('appoint_id',0);
 
         $appointment = Appointment::find($appoint_id);
