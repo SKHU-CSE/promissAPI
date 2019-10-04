@@ -39,4 +39,8 @@ Route::group(['prefix'=>'Appointment'], function() {
     Route::post('Results','AppointmentController@GetResults');
 });
 
+Route::group(['prefix'=>'promiss'],function (){
+    Route::post('ai','PromissController@PromissChat');
+});
+
 

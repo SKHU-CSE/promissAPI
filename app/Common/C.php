@@ -32,4 +32,13 @@ class C
             "data" => []
         );
     }
+
+    public static function RESULT_ARRAY_ERROR_2($message=null,$data=[]){
+        return array(
+            "result" => self::RESULT_ERROR,
+            'message' => $message,
+            "data" => $data
+
+        );
+    }
 }
