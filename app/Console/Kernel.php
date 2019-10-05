@@ -86,7 +86,7 @@ class Kernel extends ConsoleKernel
                     if ($appointObject->radius < 100)
                         $appointObject->radius = 100; //100미터까지
 
-                    $member = Member::join('users', 'Member.user_id', '=', 'users.id')->where('Member.appointment_id', $appointObject->id)->where('Member.success', 0)->get();
+                    $member = Member::join('users', 'Member.user_id', '=', 'users.id')->where('Member.appointment_id', $appointObject->id)->get();
                     if($appointObject->Fine_current==0) {
 
                         $appointObject->Fine_current = $appointObject->Fine_time;
