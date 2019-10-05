@@ -19,7 +19,7 @@ class ChatBotService
         $sendData=array(array("type"=>"text","data"=>array("details"=>$message)));
         $postvars =json_encode(array("userId"=>$id,"timestamp"=>"12345678",
             "version"=> "v1","content"=>$sendData,"event"=>"send"));
-        $url = "https://j106gflv8r.apigw.ntruss.com/promiss/beta/";
+        $url = "https://3p7wmv7dra.apigw.ntruss.com/promiss/beta/";
         $is_post = true;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

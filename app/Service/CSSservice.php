@@ -12,8 +12,8 @@ class CSSservice
     }
     private static function GetCSS($message)
     {
-        $client_id = "733fhqom8j";
-        $client_secret = "jwxEUZxCO1lKD0c1R1CDcahGlgm4iy7jLZHVRaAP";
+        $client_id = "ke4acfug28";
+        $client_secret = "Q2CkzTpLxk7XKxEKn6GVIUPH1HTYsl8cKj7l15tn";
 
         $encText = urlencode($message);
         $postvars = "speaker=mijin&speed=0.3&text=".$encText;
