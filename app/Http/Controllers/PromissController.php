@@ -60,8 +60,8 @@ class PromissController
             case '친구 위치':
                 //약속장소에 가장 가까운 약속친구는 현재 어디에 위치하고 있으며, 약속장소까지 몇남았습니다.
                 //멀리있는
-                if(empty($appointment))
-                    $getSendMessage= '현재 약속을 하고 계시지 않습니다. 약속을 만들어주세요.';
+                if($appointment->status == 0)
+                    $getSendMessage= '현재 약속을 실행중이지 않습니다. 기다려주세요';
                 else {
                     $user=null;
 
@@ -88,8 +88,8 @@ class PromissController
                 }
                 break;
             case '거리 문의':
-                if(empty($appointment))
-                    $getSendMessage= '현재 약속을 하고 계시지 않습니다. 약속을 만들어주세요.';
+                if($appointment->status ==0)
+                    $getSendMessage= '현재 약속을 실행중이지 않습니다. 기다려주세요';
                 else {
                     $user = User::find($id);
                     $distance = (int)(GpsService::geoDistance($user->latitude, $user->longitude, $appointment->latitude, $appointment->longitude) * 1000);
