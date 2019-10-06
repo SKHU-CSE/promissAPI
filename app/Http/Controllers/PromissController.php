@@ -23,7 +23,7 @@ class PromissController
         $message =request("message","");
         $id=request('id',0);
         $getSendMessage=ChatBotService::ChatbotMessage($id,$message);
-        $appointment=Member::join('appointment','Member.appointment_id','=','appointment.id')->where('Member.user_id',$id)->where('appointment.status',1)->first();
+        $appointment=Member::join('appointment','Member.appointment_id','=','appointment.id')->where('Member.user_id',$id)->where('appointment.status','!=',2)->first();
         switch ($getSendMessage)
         {
             case '인사':
@@ -33,9 +33,9 @@ class PromissController
                 if(empty($appointment))
                     $getSendMessage= '현재 약속을 하고 계시지 않습니다. 약속을 만들어주세요.';
                 else {
-                    $address = "테스트";
-                //    $address=ReverseGeoCoadingService::Geoconnect($appointment->longitude.','.$appointment->latitude);
-                    $getSendMessage = $appointment->address . '의 약속 장소는 ' .$address.'입니다.';
+                    $address = $appointment->address;
+
+                    $getSendMessage = $appointment->name . '의 약속 장소는 ' .$address.'입니다.';
                 }
                 break;
             case '약속시간 문의':
@@ -64,8 +64,8 @@ class PromissController
                     $getSendMessage= '현재 약속을 하고 계시지 않습니다. 약속을 만들어주세요.';
                 else {
                     $user=null;
-                //    $address=ReverseGeoCoadingService::Geoconnect($appointment->longitude.','.$appointment->latitude);
-                    $address = "테스트";
+
+                    $address =$appointment->name;
                     $minDistance=1000000000000;
                     $member = Member::join('users', 'Member.user_id', '=', 'users.id')->where('Member.appointment_id', $appointment->id)->where('Member.success',0)->get();
                     foreach ($member as $object) { //약속 멤버 모두에게 gps 알림 보내기
