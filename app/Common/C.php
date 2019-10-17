@@ -29,7 +29,7 @@ class C
         return array(
             "result" => self::RESULT_ERROR,
             'message' => $message,
-            "data" => []
+            "data" => null
         );
     }
 
