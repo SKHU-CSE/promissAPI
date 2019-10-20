@@ -181,7 +181,7 @@ class AppointmentController extends Controller
         $appointment->radius=100;
         $appointment->Fine_time = request('Fine_time', '300');//3분
         $appointment->Fine_money = request('Fine_money', '500');
-        $appointment->Fine_current = 0;
+        $appointment->Fine_current = 1;
         $appointment->main_user_id = $send_id;
         if ($appointment->save()) {
             //멤버 테이블에 방장을 넣어야 함
